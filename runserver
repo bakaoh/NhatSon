@@ -1,0 +1,70 @@
+#!/bin/sh
+#
+# Startup script for Main
+export JAVA_HOME=/zserver/java/jdk1.7.0/
+export APPNAME=api_base
+export HOME=/zserver/java-projects/api_base
+export APP_HOST=10.30.22.248
+export APP_PORT=2636
+export APP_ENV=production
+export XMX=1G
+export CONF=conf
+export JARFILE=$HOME/dist/api_base.jar
+export FUNCTION_MAIN=zingme.base.api.app.Main
+
+cd $HOME
+pid_file=tmp/$APPNAME.pid
+log_file=tmp/$APPNAME.log
+
+# Arguments to pass to the JVM
+JVM_OPTS=" \
+        -Dappname=$APPNAME \
+        -Xmx$XMX \
+        -XX:SurvivorRatio=8 \
+        -XX:+UseParNewGC \
+        -XX:+UseConcMarkSweepGC \
+        -XX:+CMSParallelRemarkEnabled \
+        -XX:MaxTenuringThreshold=1 \
+        -XX:CMSInitiatingOccupancyFraction=75 \
+        -XX:+UseCMSInitiatingOccupancyOnly \
+        -XX:+HeapDumpOnOutOfMemoryError \
+        -Dapphost=$APP_HOST \
+        -Dappport=$APP_PORT \
+        -Dappconfig=$HOME/$CONF \
+	-Denvironment=$APP_ENV"
+
+
+if [ -x $JAVA_HOME/bin/java ]; then
+    JAVA=$JAVA_HOME/bin/java
+else
+    JAVA=`which java`
+fi
+
+case "$1" in
+    start)
+        # Main startup
+        echo -n "Starting $APPNAME (port $APP_PORT): "
+        exec $JAVA $JVM_OPTS -cp $JARFILE $FUNCTION_MAIN > $log_file 2>&1 &
+	[ ! -z $pid_file ] && printf "%d" $! > $pid_file
+        echo "OK"
+        ;;
+    stop)
+        # Main shutdown
+        echo -n "Shutdown $APPNAME (port $APP_PORT): "
+        kill `cat $pid_file`
+        echo "OK"
+        ;;
+    reload|restart)
+        $0 stop
+	sleep 1
+        $0 start
+        ;;
+    status)
+        ;;
+    *)
+        echo "Usage: `basename $0` start|stop|restart|reload"
+        exit 1
+esac
+
+exit 1
+
