@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+
+<head th:replace="common :: head"></head>
+
+<body>
+
+<div th:replace="common :: header"></div>
+
+<div class="container">
+    <div class="gt">
+        <div class="gt_tieude">
+            <div class="g1"></div>
+            <div class="gt_tieude">VỀ CHÚNG TÔI</div>
+            <div class="g2"></div>
+        </div>
+        <div class="gt_noidung">Công Ty TNHH Đầu Tư Xây Dựng Nhất Sơn tự hào có một đội ngũ cán bộ chủ chốt, kỹ sư giàu
+            kinh nghiệm và sáng tạo.
+            <br/> Với đội ngũ Kiến Trúc Sư , Kỹ Sư , Họa Viên 2D, Họa Viên 3D và các chuyên gia trong lĩnh vực xây dựng
+            tài năng và sáng tạo, cùng đội ngũ thợ kỹ thuật lành nghề có nhiều năm kinh nghiệm trong lĩnh vực thi công
+            công trình, chuyên gia công các sản phẩm nội-ngoại thất, chúng tôi tin tưởng sẽ mang đến cho quý khách hàng
+            sự hài lòng tối đa về công trình của mình.
+            <br/> Chúng tôi hoạt động với chuyên môn ngành nghề đa dạng, hoạt động trên tất cả các lĩnh vực xây dựng :
+            Công trình dân dụng, công trình công nghiệp, giao thông, thủy lợi, hạ tầng kỹ thuật…tham gia khảo sát, thiết
+            kế thi công, kiểm định…phục vụ các công trình trên toàn quốc.
+            <br/> Chúng tôi có nhiều kiến trúc sư và kỹ sư với trình độ chuyên môn cao và sự tâm huyết với nghề luôn nổ
+            lực học tập, tìm tòi sáng tạo để mang đến cho quý khách hàng những công trình kiến trúc có phong cách độc
+            đáo nhất, nâng cao tay nghề để đáp ứng nhu cầu cao của khách hàng.
+        </div>
+        <div class="gt_img"></div>
+    </div>
+    <div th:if="${tabs}" class="tc">
+        <div class="tc_conten">
+            <div class="tc_tieude">
+                <div class="g1"></div>
+                <div class="tc_tieude">THI CÔNG CÔNG TRÌNH</div>
+                <div class="g2"></div>
+            </div>
+        </div>
+        <div class="tc_conten_tab">
+            <ul id="tabs">
+                <li th:each="t : ${tabs}"><a th:text="${t.name}" href="#" th:title="${t.id}"></a></li>
+            </ul>
+
+            <div id="content">
+                <div th:each="t : ${tabs}" th:id="${t.id}">
+                    <div class="tc_left">
+                        <div class="tc_left_khung"></div>
+                        <div class="tc_left_img">
+                            <img th:src="${t.article.image}" alt="" title=""/>
+                        </div>
+                    </div>
+                    <div class="tc_right">
+                        <div class="tc_right_td">
+                            <a th:text="${t.article.title}" th:href="${t.article.url}"></a>
+                        </div>
+                        <div th:text="${t.article.brief}" class="tc_right_detail"></div>
+                        <div class="tc_right_lienquan">
+                            <ul>
+                                <li th:each="r : ${t.relates}">
+                                    <div class="tc_right_tick"></div>
+                                    <a th:href="${r.url}" th:text="${r.title}"></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tc_right_btn">
+                            <a th:href="${t.article.url}">
+                                <img src="img/xt.png" alt="" title=""/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:if="${recents}" class="tintuc">
+        <div class="tintuc_tieude">
+            <div class="g1"></div>
+            <div class="tt_tieude">TIN TỨC</div>
+            <div class="g2"></div>
+        </div>
+        <div class="tintuc_conten">
+            <ul>
+                <li th:each="n : ${recents}">
+                    <div class="tt_img">
+                        <img th:src="${n.image}"/>
+                    </div>
+                    <div class="tt_detail">
+                        <div class="tt_detail_tieude">
+                            <a th:href="${n.url}" th:text="${n.title}"></a>
+                        </div>
+
+                        <div class="tt_detail_calendar">
+                            <span class="calendar"></span><span th:text="${n.time}"></span>
+                        </div>
+                        <div class="tt_detail_comment"><span class="comment"></span><span></span>
+                        </div>
+                        <div class="tt_detail_light"></div>
+                        <div th:text="${n.brief}" class="tt_detail_noidung"></div>
+                        <div class="tt_detail_xemthem"><a th:href="${n.url}">Xem Thêm >></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="Partner">
+        <ul>
+            <li><img src="img/dt1.png"/></li>
+            <li><img src="img/dt2.png"/></li>
+            <li><img src="img/dt3.png"/></li>
+            <li><img src="img/dt4.png"/></li>
+            <li><img src="img/dt5.png"/></li>
+            <li><img src="img/dt6.png"/></li>
+        </ul>
+        <!--<div class="Partner_pre "></div>-->
+        <!--<div class="Partner_next "></div>-->
+    </div>
+</div>
+
+<div th:replace="common :: footer"></div>
+
+</body>
+
+</html>

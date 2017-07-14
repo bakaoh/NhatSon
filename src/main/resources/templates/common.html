@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+
+    <meta charset="utf-8"/>
+
+    <title>Nhat Son</title>
+
+    <link rel="stylesheet" href="/css/style.css" media="screen"/>
+    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" type="text/css" href="/css/styles.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="/css/demo.css" media="all"/>
+    <script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.flexslider-min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#content div").hide(); // Initially hide all content
+            $("#tabs li:first").attr("id", "current"); // Activate first tab
+            $("#content div:first").fadeIn(); // Show first tab content
+
+            $('#tabs a').click(function(e) {
+                e.preventDefault();
+                $("#content div").hide(); //Hide all content
+                $("#tabs li").attr("id", ""); //Reset id's
+                $(this).parent().attr("id", "current"); // Activate this
+                $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
+            });
+        })();
+
+    </script>
+
+    <script type="text/javascript" charset="utf-8">
+        var $ = jQuery.noConflict();
+        $(window).load(function() {
+            $('.flexslider').flexslider({
+                animation: "fade"
+            });
+
+            $(function() {
+                $('.show_menu').click(function() {
+                    $('.menu').fadeIn();
+                    $('.show_menu').fadeOut();
+                    $('.hide_menu').fadeIn();
+                });
+                $('.hide_menu').click(function() {
+                    $('.menu').fadeOut();
+                    $('.show_menu').fadeIn();
+                    $('.hide_menu').fadeOut();
+                });
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+
+<div th:fragment="header" class="header">
+    <div class="header_top">
+        <div class="header_top_conten">
+            <div class="header_top_slogan">nói thật làm thật</div>
+            <div class="header_top_contact">
+                <span class="phone1"></span>
+                <span class="hotline">Hotline: 0902.960.360/ 0938.098.930</span>
+                <span class="glyphicon glyphicon-envelope email1"></span>
+                <span>xaydungnhatsonvt@gmail.com</span>
+            </div>
+
+        </div>
+    </div>
+    <div class="header_menu">
+        <div class="header_menu_conten">
+            <div class="logo"></div>
+            <div class="Menu">
+                <ul class="menu">
+                    <li><a th:href="${homeUrl}">Trang Chủ</a></li>
+                    <li th:each="i : ${menu}">
+                        <a th:text="${i.name}" th:href="${i.url}"></a>
+                        <ul>
+                            <li th:each="s : ${i.subs}">
+                                <a th:text="${s.name}" th:href="${s.url}" class="documents"></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a th:href="${hireUrl}">Tuyển Dụng</a></li>
+                    <li><a th:href="${contactUrl}">Liên Hệ</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div th:if="${showBanner}" class="header_banner">
+        <div class="flexslider">
+            <ul class="slides">
+                <li>
+                    <img src="/img/banner.jpg" alt="" title=""/>
+                </li>
+                <li>
+                    <img src="/img/banner1.jpg" alt="" title=""/>
+                </li>
+                <li>
+                    <img src="/img/banner2.jpg" alt="" title=""/>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div th:if="not ${showBanner}" class="header_banner_page">
+        <div class="header_banner_page_img">
+            <img src="/img/bg.jpg"/>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="footer" class="footer">
+    <div class="footer_lienket">
+        <div class="footer_lienket_txt">LIÊN KẾT</div>
+        <ul>
+            <li>
+                <a th:href="${facebook}" class="footer_lienket_fb"><img src="/img/lk1.png"/>
+                </a>
+            </li>
+            <li>
+                <a th:href="${youtube}" class="footer_lienket_youtube"><img src="/img/lk2.png"/>
+                </a>
+            </li>
+            <li>
+                <a th:href="${google}" class="footer_lienket_google"><img src="/img/lk3.png"/>
+                </a>
+            </li>
+            <li>
+                <a th:href="${skype}" class="footer_lienket_skype"><img src="/img/lk4.png"/>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="footer_conten">
+        <div class="footer_lienhe">
+            <div class="footer_lienhe_td">LIÊN HỆ</div>
+            <ul>
+                <li>
+                    <div class="lh1"></div>
+                    <span>ĐC: Tổ 12- Ấp Phước Lộc- Xã Tân Phước
+ Huyện Tân Thành- Tỉnh Bà Rịa_Vũng Tàu.</span>
+                </li>
+                <li>
+                    <div class="lh2"></div>
+                    <span>Email: xaydungnhatsonvt@gmail.com</span>
+                </li>
+                <li>
+                    <div class="lh3"></div>
+                    <span>Hotline: 0902.960.360/ 0938.098.930</span>
+                </li>
+                <li>
+                    <div class="lh4"></div>
+                    <span>Website: xaydungnhatson.com.vn</span>
+                </li>
+            </ul>
+
+        </div>
+        <div class="footer_menu">
+            <div class="footer_lienhe_menu">MENU</div>
+            <ul>
+                <li>
+                    <div class="footer_menu_tick"></div>
+                    <a th:href="${homeUrl}"><span>Trang Chủ</span></a>
+                </li>
+                <li th:each="i : ${menu}">
+                    <div class="footer_menu_tick"></div>
+                    <a th:href="${i.url}"><span  th:text="${i.name}"></span></a>
+                </li>
+                <li>
+                    <div class="footer_menu_tick"></div>
+                    <a th:href="${hireUrl}"><span>Tuyển Dụng</span></a>
+                </li>
+                <li>
+                    <div class="footer_menu_tick"></div>
+                    <a th:href="${contactUrl}"><span>Liên Hệ</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="footer_bangdo">
+            <div class="footer_bangdo_td">BẢN ĐỒ</div>
+            <div class="footer_bangdo_local">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3927.0918617919842!2d107.046787941897!3d10.515257573330546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175132c010a4a1f%3A0xc9be3d8e0247e26c!2zTmjDoCBUaOG7nSBQaMaw4bubYyBM4buZYw!5e0!3m2!1sen!2s!4v1499784035996" width="310" height="192" frameborder="0" style="border:0" allowfullscreen="true"></iframe>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer_botom">
+        <div class="footer_botom_coppyright">
+            <span><img src="/img/c.jpg"/></span>
+            <span>2017 by Nhất Sơn. Designer by KieuHuyen</span>
+        </div>
+        <div class="footer_top">
+            <a href="#" id="go_top"><img src="/img/top.png"/>
+            </a>
+            <span>Lên đầu trang</span>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="newsRight" class="page_tintuc_right">
+    <div class="tintuc_right_duan">
+        <h3>Dự án nổi bật</h3>
+        <div class="tintuc_g2"></div>
+
+        <div class="tintuc_right_da">
+            <ul>
+                <li th:each="f : ${features}">
+                    <a th:href="${f.url}">
+                        <div class="item item-type-line">
+                            <a class="item-hover" th:href="${f.url}" target="_blank">
+                                <div class="item-info">
+                                    <div th:text="${f.title}" class="headline"></div>
+                                    <div class="line"></div>
+
+                                </div>
+                                <div class="mask"></div>
+                            </a>
+                            <div class="item-img"><img th:src="${f.image}"/>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="tintuc_right_tinnoibat">
+        <h3>Tin tức mới nhất</h3>
+        <div class="tintuc_g2"></div>
+        <ul>
+            <li th:each="r : ${recents}">
+                <a th:href="${r.url}">
+                    <span class="glyphicon glyphicon-asterisk"></span>
+                    <span th:text="${r.title}"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+
+</html>

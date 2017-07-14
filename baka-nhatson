@@ -1,0 +1,39 @@
+#!/bin/bash
+#
+# javaserver: Startup script for Any Server Application.
+#
+# chkconfig: 35 80 05
+# description: Startup script for Any Server Application.
+
+SCRIPT_HOME=/tserver/java-projects/nhatson;
+export SCRIPT_HOME
+
+start() {
+        echo -n "Starting Nhatson Service: "
+        $SCRIPT_HOME/runservice.sh start
+        sleep 2
+        echo "done"
+}
+
+stop() {
+        echo -n "Stopping Nhatson Service: "
+        $SCRIPT_HOME/runservice.sh stop
+        echo "done"
+}
+
+# See how we were called.
+case "$1" in
+        start)
+                start
+                ;;
+        stop)
+                stop
+                ;;
+        restart)
+                stop
+                start
+                ;;
+        *)
+                echo $"Usage: baka-nhatson {start|stop|restart}"
+                exit
+esac

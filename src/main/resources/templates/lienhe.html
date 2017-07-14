@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+
+<head th:replace="common :: head"></head>
+
+<body>
+
+<div th:replace="common :: header"></div>
+
+<div class="container">
+    <div class="container_lienhe">
+        <div class="lienhe_tieude">THÔNG TIN LIÊN HỆ</div>
+        <div class="g2"></div>
+        <div class="lienhe_detail">Nhất Sơn chân thành cảm ơn sự quan tâm của khách hàng, bạn có gọp ý hay cần hỗ trợ từ
+            chúng tôi vui lòng nhập thông tin bên dưới
+        </div>
+        <div class="lienhe_bangdo">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3927.0918617919842!2d107.046787941897!3d10.515257573330546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3175132c010a4a1f%3A0xc9be3d8e0247e26c!2zTmjDoCBUaOG7nSBQaMaw4bubYyBM4buZYw!5e0!3m2!1sen!2s!4v1499784035996"
+                    width="100%" height="410" frameborder="0" style="border:0" allowfullscreen="true"></iframe>
+        </div>
+        <div class="lienhe_thongtin">
+            <h3>Công Ty TNHH Đầu Tư Xây Dựng Nhất Sơn</h3>
+            <ul>
+                <li> + Thiết kế, thi công công trình nhà phố, biệt thự.
+                </li>
+                <li> + Chuyên thi công chống thấm.
+                </li>
+                <li> + Sửa chữa, cải tạo công trình dân dụng, công nghiệp.
+                </li>
+                <li> + Tư vấn quản lý, giám sát dự án.</li>
+            </ul>
+            <h3>Địa Chỉ</h3>
+            <h6>Tổ 12- Ấp Phước Lộc- Xã Tân Phước
+                Huyện Tân Thành- Tỉnh Bà Rịa_Vũng Tàu.</h6>
+            <h3>Điện Thoại</h3>
+            <h4>0902.960.360/ 0938.098.930</h4>
+        </div>
+
+        <div class="lienhe_from">
+            <div class="wprt-contact-form-1">
+                <span class="wpcf7-form-control-wrap name">
+                    <input id="form-name" type="text" name="name" value="" size="40"
+                           class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
+                           aria-required="true" aria-invalid="false"
+                           placeholder="Name"/></span>
+                <span class="wpcf7-form-control-wrap email">
+                    <input id="form-email" type="email" name="email" value="" size="40"
+                           class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email"
+                           aria-required="true" aria-invalid="false"
+                           placeholder="E-mail"/></span>
+                <span class="wpcf7-form-control-wrap phone">
+                    <input id="form-phone" type="text" name="phone" value="" size="40"
+                           class="wpcf7-form-control wpcf7-text"
+                           aria-invalid="false"
+                           placeholder="Phone number"/></span>
+                <span class="wpcf7-form-control-wrap subject">
+                    <input id="form-subject" type="text" name="subject" value="" size="40"
+                           class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
+                           aria-required="true" aria-invalid="false"
+                           placeholder="Subject"/></span>
+                <span class="wpcf7-form-control-wrap message">
+                    <textarea id="form-message" name="message" cols="40" rows="10"
+                              class="wpcf7-form-control wpcf7-textarea"
+                              aria-invalid="false"
+                              placeholder="Message"></textarea></span>
+            </div>
+            <div class="lienhe_right_btn" style="display: none;">
+                <a href="#" onclick="return post();">
+                    <img src="img/send.png" alt="" title=""/>
+                </a>
+            </div>
+            <script>
+function post() {
+    var params = {
+        name: $('#form-name').val(),
+        email: $('#form-email').val(),
+        phone: $('#form-phone').val(),
+        subject: $('#form-subject').val(),
+        message: $('#form-message').val()
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: '/contact',
+        data: params
+    });
+    $('#form-subject').val("");
+    $('#form-message').val("");
+    return false;
+}
+            </script>
+        </div>
+
+    </div>
+
+</div>
+
+<div th:replace="common :: footer"></div>
+
+</body>
+
+</html>

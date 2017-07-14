@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
+
+<head th:replace="common :: head"></head>
+
+<body>
+
+<div th:replace="common :: header"></div>
+
+<div class="container">
+    <div class="page_tintuc">
+        <div class="page_tuyendung_left">
+            <div class="tuyendung">
+                <ul>
+                    <li th:each="h : ${jobs}">
+                        <h4 th:text="${h.getTitle()}"></h4>
+                        <div class="tuyendung_category">
+                            <ul>
+                                <li>
+                                    <div class="tuyendung_time"></div>
+                                    <span>Ngày đăng:</span><span th:text="${h.strPostDate()}"></span></li>
+                                <li>
+                                    <div class="tuyendung_tt"></div>
+                                    <span>Kinh nghiệm:</span><span th:text="${h.getExperience()}"></span></li>
+                                <li>
+                                    <div class="tuyendung_time"></div>
+                                    <span>Hạn nộp:</span><span th:text="${h.strDeadline()}"></span></li>
+                                <li>
+                                    <div class="tuyendung_tt"></div>
+                                    <span>Tốt nghiệp:</span><span th:text="${h.getDiploma()}"></span></li>
+                                <li>
+                                    <div class="tuyendung_tt"></div>
+                                    <span>Loại việc:</span><span th:text="${h.getType()}"></span></li>
+                                <li>
+                                    <div class="tuyendung_tt"></div>
+                                    <span>Giới tính:</span><span th:text="${h.getSex()}"></span></li>
+                                <li>
+                                    <div class="tuyendung_tt"></div>
+                                    <span>Số lượng:</span><span th:text="${h.getNum()}">3</span></li>
+                                <li>
+                                    <div class="tuyendung_tt"></div>
+                                    <span>Nơi làm việc:</span><span th:text="${h.getArea()}"></span></li>
+                            </ul>
+
+                        </div>
+                        <div class="td_right_btn1">
+                            <a th:href="${h.getUrl()}"></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="td_btn">
+                <!--<ul>-->
+                    <!--<li><a href="">1</a></li>-->
+                    <!--<li><a href="">2</a></li>-->
+                    <!--<li><a href="">3</a></li>-->
+                    <!--<li><a href="">4</a></li>-->
+                <!--</ul>-->
+            </div>
+
+        </div>
+
+        <div class="page_tuyendung_right">
+
+            <div class="tuyendung_logo"></div>
+            <h3>Công ty TNHH Đầu Tư Xây Dựng Nhất Sơn</h3>
+            <h4>xaydungnhatson.com.vn</h4>
+            <h5>Só nhân viên:25-99<br/>Tên liên hệ: Nhất Sơn</h5>
+            <h2>Công Ty TNHH Đầu Tư Xây Dựng Nhất Sơn tự hào có một đội ngũ cán bộ chủ chốt, kỹ sư giàu kinh nghiệm và
+                sáng tạo.
+
+                Với đội ngũ Kiến Trúc Sư , Kỹ Sư , Họa Viên 2D, Họa Viên 3D và các chuyên gia trong lĩnh vực xây dựng
+                tài năng và sáng tạo, cùng đội ngũ thợ kỹ thuật lành nghề có nhiều năm kinh nghiệm trong lĩnh vực thi
+                công công trình, chuyên gia công các sản phẩm nội-ngoại thất, chúng tôi tin tưởng sẽ mang đến cho quý
+                khách hàng sự hài lòng tối đa về công trình của mình.</h2>
+
+            <div class="video">
+                <iframe width="99%" height="300" src="https://www.youtube.com/embed/-yh69TUO2Fs"
+                        frameborder="0" style="top: 0;bottom: 30px" allowfullscreen="true"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="common :: footer"></div>
+
+</body>
+
+</html>
