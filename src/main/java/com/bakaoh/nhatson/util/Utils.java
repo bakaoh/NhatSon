@@ -11,7 +11,9 @@ public class Utils {
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY");
 
     public static String getImageUrl(String image) {
-        return image.replaceFirst("/domain/article", "/admin/rest/articles").replaceAll("\\.bin", "");
+        return image.replaceFirst("/domain/article", "/admin/rest/articles")
+                .replaceFirst("/domain/photo", "/admin/rest/photos")
+                .replaceAll("\\.bin", "");
     }
 
     public static String format(Date date) {
